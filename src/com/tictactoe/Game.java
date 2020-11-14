@@ -1,3 +1,8 @@
+/**
+ * dlksfgjsd'ihgsd'iofjghsd'fig'sdfijhg
+ *
+ *
+ * */
 package com.tictactoe;
 
 import java.util.Random;
@@ -8,7 +13,6 @@ public class Game {
     private Random random;
 
     public Game(){
-
         initializeGame();
         displayBoard();
         makeFirstMove();
@@ -27,13 +31,10 @@ public class Game {
     }
 
     private void makeFirstMove() {
-
         System.out.println("Who would you like to make the first move?");
         System.out.println("1 - Computer");
         System.out.println("2 - Player");
-
         int choice = board.getScanner().nextInt();
-
         if(choice == 1){
             //random.nextInt(Constants.BOARD_SIZE) -> random number between 0 and boardSize
             Tile tile = new Tile(random.nextInt(Constants.BOARD_SIZE), random.nextInt(Constants.BOARD_SIZE));
@@ -43,11 +44,24 @@ public class Game {
     }
 
     private void playGame(){
-
+        char columnChar;
+        int columnInt = -1;
+        int rowInt = -1;
         while (board.isRunning()){
 
-            System.out.println("Please enter your move:");
-            Tile userTile = new Tile(board.getScanner().nextInt(), board.getScanner().nextInt() );
+            System.out.println( "Make a move by entering the letter corresponding to your chosen columnChar plus enter\n" +
+                                "and the corresponding number to your chosen row plus enter.\n" +
+                                "Please enter your move:");
+            columnChar = board.getScanner().next().charAt(0);
+            if(Character.compare(columnChar, 'a') == 0 || Character.compare(columnChar, 'A') == 0){
+                columnInt = 0;
+            }else if(Character.compare(columnChar, 'b') == 0 || Character.compare(columnChar, 'B') == 0){
+                columnInt = 1;
+            }else if(Character.compare(columnChar, 'c') == 0 || Character.compare(columnChar, 'C') == 0){
+                columnInt = 2;
+            }
+            rowInt =  board.getScanner().nextInt() - 1;
+            Tile userTile = new Tile( rowInt, columnInt);
 
             board.move(userTile, Player.USER);
             board.displayBoard();
