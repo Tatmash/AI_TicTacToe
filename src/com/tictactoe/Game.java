@@ -48,7 +48,6 @@ public class Game {
         int columnInt = -1;
         int rowInt = -1;
         while (board.isRunning()){
-
             System.out.println( "Make a move by entering the letter corresponding to your chosen columnChar plus enter\n" +
                                 "and the corresponding number to your chosen row plus enter.\n" +
                                 "Please enter your move:");
@@ -62,23 +61,17 @@ public class Game {
             }
             rowInt =  board.getScanner().nextInt() - 1;
             Tile userTile = new Tile( rowInt, columnInt);
-
             board.move(userTile, Player.USER);
             board.displayBoard();
-
             board.callMinimax(0, Player.COMPUTER);
-
             for (Tile tile : board.getRootValues()) {
                 System.out.println("Tile values: " + tile + " minimaxValue: " + tile.getMinimaxValue());
             }
-
             board.move(board.getBestMove(), Player.COMPUTER);
             board.displayBoard();
-
             if (!board.isRunning()) {
                 break;
             }
-
         }
     }
 
@@ -91,5 +84,4 @@ public class Game {
             System.out.println("It is a draw.");
         }
     }
-
 }
