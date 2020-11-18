@@ -1,8 +1,3 @@
-/**
- * dlksfgjsd'ihgsd'iofjghsd'fig'sdfijhg
- *
- *
- * */
 package com.tictactoe;
 
 import java.util.Random;
@@ -16,7 +11,6 @@ public class Game {
         initializeGame();
         displayBoard();
         askQuestion();
-        //computerFirstMove();
         playGame();
         checkStatus();
     }
@@ -63,23 +57,19 @@ public class Game {
     }
 
     private void playGame(){
-        char columnChar;
+        String userInput;
+        String validatedUserInput;
         int columnInt = -1;
-        int rowInt = -1;
+        int rowInt;
         while (board.isRunning()){
             System.out.println( "Make a move by entering the letter corresponding to your chosen column plus enter\n" +
                                 "and the corresponding number to your chosen row plus enter.\n" +
                                 "Please enter your move:");
-            columnChar = board.getScanner().next().charAt(0);
-            if(Character.compare(columnChar, 'a') == 0 || Character.compare(columnChar, 'A') == 0){
-                columnInt = 0;
-            }else if(Character.compare(columnChar, 'b') == 0 || Character.compare(columnChar, 'B') == 0){
-                columnInt = 1;
-            }else if(Character.compare(columnChar, 'c') == 0 || Character.compare(columnChar, 'C') == 0){
-                columnInt = 2;
-            }
-            rowInt =  board.getScanner().nextInt() - 1;
-            Tile userTile = new Tile( rowInt, columnInt);
+            userInput = board.getScanner().next();
+            validatedUserInput = validateInput(userInput);
+            columnInt = getColumnInt(validatedUserInput);
+            rowInt =  getRowInt(validatedUserInput);
+            Tile userTile = new Tile( columnInt, rowInt);
             board.move(userTile, Player.USER);
             board.displayBoard();
             board.callMinimax(0, Player.COMPUTER);
@@ -94,6 +84,62 @@ public class Game {
                 }
             }
         }
+    }
+
+
+    public String validateInput(String userInput){
+        String twoChars;
+        if(!(userInput.length() == 2)){
+            twoChars = takeNewInput();
+        }else{
+            twoChars = userInput;
+        }
+        return letterPlusDigit(twoChars);
+    }
+
+    private String takeNewInput(){
+        System.out.println("Please enter two characters, a letter and a number. \n(eg. for top left corner A1 + enter.)\n");
+        String userInput = board.getScanner().next();
+        if(!(userInput.length() == 2)){
+            takeNewInput();
+        }
+        return userInput;
+    }
+
+    private String letterPlusDigit(String twoChars){
+        String letter = null;
+        String digit = null;
+        if(Character.isLetter(twoChars.charAt(0)) && !Character.isLetter(twoChars.charAt(1))){
+            letter = Character.toString(twoChars.charAt(0));
+        }else if(Character.isLetter(twoChars.charAt(1)) && !Character.isLetter(twoChars.charAt(0))){
+            letter = Character.toString(twoChars.charAt(1));
+        }else{
+            letterPlusDigit(takeNewInput());
+        }
+        if(Character.isDigit(twoChars.charAt(0)) && !Character.isDigit(twoChars.charAt(1))){
+            digit = Character.toString(twoChars.charAt(0));
+        }else if(Character.isDigit(twoChars.charAt(1)) && !Character.isDigit(twoChars.charAt(0))){
+            digit = Character.toString(twoChars.charAt(1));
+        }else{
+            letterPlusDigit(takeNewInput());
+        }
+        return letter + digit;
+    }
+
+    private int getColumnInt(String validatedUserInput){
+        int columnInt = -1;
+        if(Character.compare(validatedUserInput.charAt(0), 'a') == 0 || Character.compare(validatedUserInput.charAt(0), 'A') == 0){
+            columnInt = 0;
+        }else if(Character.compare(validatedUserInput.charAt(0), 'b') == 0 || Character.compare(validatedUserInput.charAt(0), 'B') == 0){
+            columnInt = 1;
+        }else if(Character.compare(validatedUserInput.charAt(0), 'c') == 0 || Character.compare(validatedUserInput.charAt(0), 'C') == 0){
+            columnInt = 2;
+        }
+        return columnInt;
+    }
+
+    private int getRowInt(String validatedUserInput) {
+        return validatedUserInput.charAt(1) - 1;
     }
 
     private void checkStatus(){
