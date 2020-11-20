@@ -1,5 +1,7 @@
 package com.tictactoe;
 
+import java.util.ArrayList;
+
 public class Validation {
 
     public static boolean miracleFunction1(String userInput) {
@@ -25,7 +27,7 @@ public class Validation {
     }
 
     public static boolean miracleFunction3(String userInput){
-        if(rightValues(userInput)){ //TODO user should not be able to move onto occupied fields
+        if(rightValues(userInput)){
             return true;
         }else{
             System.out.println("Listen, the coordinates are wrong. :(\n");
@@ -33,18 +35,30 @@ public class Validation {
         }
     }
 
+    //TODO board.getEmptyTiles does not contains the accurate list of empty tiles. Inspect the method or write another one.
+    //TODO equals and hashcode are done (overridden) in Tile
+    public static boolean miracleFunction4(Board board, int column, int row){
+        ArrayList<Tile> emptyTiles = (ArrayList<Tile>) board.getEmptyTiles();
+        Tile candidateTile = new Tile(column, row);
+        if(emptyTiles.contains(candidateTile)){
+            emptyTiles.clear();
+            candidateTile = null;
+            System.out.println("miracle 4 true");
+            return true;
+        }
+        System.out.println("miracle 4 false");
+        return false;
+    }
+
     private static boolean rightValues(String userInput) {
         String letter = String.valueOf(userInput.charAt(0));
         String digit = String.valueOf(userInput.charAt(1));
-        if((letter.equals("a") || letter.equals("A")  ||
-            letter.equals("b") || letter.equals("B")  ||
-            letter.equals("c") || letter.equals("C")) &&
-           (Integer.parseInt(digit) == 1 ||
-            Integer.parseInt(digit) == 2 ||
-            Integer.parseInt(digit) == 3)){
-            return true;
-        }
-        return false;
+        return (letter.equals("a") || letter.equals("A") ||
+                letter.equals("b") || letter.equals("B") ||
+                letter.equals("c") || letter.equals("C")) &&
+                (Integer.parseInt(digit) == 1 ||
+                        Integer.parseInt(digit) == 2 ||
+                        Integer.parseInt(digit) == 3);
     }
 
     private static String changeOrderOfChars(String userInput) {
@@ -54,10 +68,7 @@ public class Validation {
     }
 
     private static boolean rightOrder(String userInput) {
-        if(Character.isLetter(userInput.charAt(0))){
-            return true;
-        }
-        return false;
+        return Character.isLetter(userInput.charAt(0)) && Character.isDigit(userInput.charAt(1));
     }
 
     private static boolean oneLetterOneDigit(String userInput) {
@@ -66,9 +77,8 @@ public class Validation {
     }
 
     private static boolean isLengthTwoDigits(String userInput) {
-        if(userInput.length() == 2){
-            return true;
-        }
-        return false;
+        return userInput.length() == 2;
     }
+
+
 }

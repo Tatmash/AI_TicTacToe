@@ -92,8 +92,12 @@ public class Game {
             if(Validation.miracleFunction1(userInput)){
                 String rightOrder = Validation.miracleFunction2(userInput);
                 if(Validation.miracleFunction3(rightOrder)){
-                    result = rightOrder;
-                    this.flag = true;
+                    int column = getColumnInt(rightOrder);
+                    int row = getRowInt(rightOrder);
+                    if(Validation.miracleFunction4(this.board, column, row)) {
+                        result = rightOrder;
+                        this.flag = true;
+                    }
                 }
             }
         }

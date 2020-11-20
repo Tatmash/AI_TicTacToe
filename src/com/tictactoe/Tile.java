@@ -1,5 +1,7 @@
 package com.tictactoe;
 
+import java.util.Objects;
+
 public class Tile {
 
     private int x;
@@ -39,6 +41,20 @@ public class Tile {
     @Override
     public String toString(){
         return "("+this.x+","+this.y+")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tile)) return false;
+        Tile tile = (Tile) o;
+        return getX() == tile.getX() &&
+                getY() == tile.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY());
     }
 }
 
