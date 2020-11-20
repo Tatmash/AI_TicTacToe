@@ -89,95 +89,15 @@ public class Game {
                     "and the corresponding number to your chosen row plus enter.\n" +
                     "Please enter your move:");
             String userInput = board.getScanner().next();
-            if(miracleFunction(userInput)){
-                result = userInput;
-                this.flag = true;
+            if(Validation.miracleFunction1(userInput)){
+                String rightOrder = Validation.miracleFunction2(userInput);
+                if(Validation.miracleFunction3(rightOrder)){
+                    result = rightOrder;
+                    this.flag = true;
+                }
             }
         }
         return result;
-    }
-
-    //TODO validation should go to a separate class
-    private boolean miracleFunction(String userInput) {
-        if(isLengthTwoDigits(userInput)){
-            if(oneLetterOneDigit(userInput)){
-                if(rightOrder(userInput)){ //TODO it should recognize the coordinates in the wrong order too
-                    if(rightValues(userInput)){ //TODO user should not be able to move twice to the same field
-                        return true;
-                    }else{
-                        System.out.println("Listen, the coordinates are wrong. :(\n");
-                        return false;
-                    }
-                }else{
-                    if(rightValues(changeOrderOfChars(userInput))){
-                        System.out.println("Listen, you need to enter the letter followed by a digit. :(\n");
-                        return false;
-                    }else{
-                        System.out.println("Listen, the coordinates are wrong. :(\n");
-                        return false;
-                    }
-                }
-            }else{
-                System.out.println("Mate, you need to enter two characters. A *letter* and a *number*.\n");
-                return false;
-            }
-        }else{
-            System.out.println("Mate, you need to enter *two* characters. A letter and a number.\n");
-            return false;
-        }
-    }
-
-    private boolean rightValues(String userInput) {
-        String letter = String.valueOf(userInput.charAt(0));
-        String digit = String.valueOf(userInput.charAt(1));
-        if((letter.equals("a") || letter.equals("A")  ||
-            letter.equals("b") || letter.equals("B")  ||
-            letter.equals("c") || letter.equals("C")) &&
-           (Integer.parseInt(digit) == 1 ||
-            Integer.parseInt(digit) == 2 ||
-            Integer.parseInt(digit) == 3)){
-            return true;
-        }
-        return false;
-    }
-
-    private String changeOrderOfChars(String userInput) {
-        String letter = String.valueOf(userInput.charAt(1));
-        String digit = String.valueOf(userInput.charAt(0));
-        return letter + digit;
-    }
-
-    private boolean rightOrder(String userInput) {
-        if(Character.isLetter(userInput.charAt(0))){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean oneLetterOneDigit(String userInput) {
-        //TODO can I reduce it to a single file?
-        if (Character.isLetter(userInput.charAt(0)) && Character.isDigit(userInput.charAt(1))) {
-            return true;
-        } else if(Character.isLetter(userInput.charAt(1)) && Character.isDigit(userInput.charAt(0))) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isLengthTwoDigits(String userInput) {
-        if(userInput.length() == 2){
-            return true;
-        }
-        return false;
-    }
-
-    private String takeNewInput(){
-        System.out.println("Please enter two characters, a letter and a number. \n(eg. for top left corner A1 + enter.)\n");
-        String userInput = board.getScanner().next();
-        if(!(userInput.length() == 2)){
-            takeNewInput();
-        }
-        return userInput;
     }
 
     private int getColumnInt(String validatedUserInput){
