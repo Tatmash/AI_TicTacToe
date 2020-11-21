@@ -3,7 +3,6 @@ package com.tictactoe;
 import java.util.*;
 
 public class Board {
-
     private List<Tile> emptyTiles;
     private Scanner scanner;
     private Player[][] board;
@@ -20,7 +19,6 @@ public class Board {
     }
 
     public boolean isRunning() {
-
         if( isWinning(Player.COMPUTER) ) {
             return false;
         }
@@ -30,13 +28,11 @@ public class Board {
         if( getEmptyTiles().isEmpty() ) {
             return false;
         }
-
         return true;
     }
 
     public List<Tile> getEmptyTiles() {
         emptyTiles = new ArrayList<>();
-
         for (int i = 0; i < Constants.BOARD_SIZE; ++i) {
             for (int j = 0; j < Constants.BOARD_SIZE; ++j) {
                 if (board[i][j] == Player.NONE) {
