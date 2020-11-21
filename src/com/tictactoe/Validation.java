@@ -1,10 +1,9 @@
 package com.tictactoe;
-
 import java.util.ArrayList;
 
-public class Validation {
+class Validation {
 
-    public static boolean miracleFunction1(String userInput) {
+    static boolean miracleFunction1(String userInput) {
         if(isLengthTwoDigits(userInput)){
             if(oneLetterOneDigit(userInput)){
                 return true;
@@ -18,7 +17,7 @@ public class Validation {
         }
     }
 
-    public static String miracleFunction2(String userInput){
+    static String miracleFunction2(String userInput){
         if(rightOrder(userInput)){
             return userInput;
         }else{
@@ -26,7 +25,7 @@ public class Validation {
         }
     }
 
-    public static boolean miracleFunction3(String userInput){
+    static boolean miracleFunction3(String userInput){
         if(rightValues(userInput)){
             return true;
         }else{
@@ -35,18 +34,14 @@ public class Validation {
         }
     }
 
-    //TODO board.getEmptyTiles does not contains the accurate list of empty tiles. Inspect the method or write another one.
-    //TODO equals and hashcode are done (overridden) in Tile
-    public static boolean miracleFunction4(Board board, int column, int row){
+    static boolean miracleFunction4(Board board, int column, int row){
         ArrayList<Tile> emptyTiles = (ArrayList<Tile>) board.getEmptyTiles();
-        Tile candidateTile = new Tile(column, row);
+        Tile candidateTile = new Tile(row, column);
         if(emptyTiles.contains(candidateTile)){
             emptyTiles.clear();
-            candidateTile = null;
-            System.out.println("miracle 4 true");
             return true;
         }
-        System.out.println("miracle 4 false");
+        System.out.println("Mate, that field is occupied.\n");
         return false;
     }
 
@@ -79,6 +74,4 @@ public class Validation {
     private static boolean isLengthTwoDigits(String userInput) {
         return userInput.length() == 2;
     }
-
-
 }
