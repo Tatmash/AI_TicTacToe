@@ -1,5 +1,4 @@
 package com.tictactoe;
-
 import java.util.*;
 
 public class Board {
@@ -91,14 +90,6 @@ public class Board {
             }
         }
         return false;
-    }
-
-    public void makeUserInput() {
-        System.out.println("User's move: ");
-        int x = scanner.nextInt();
-        int y = scanner.nextInt();
-        Tile point = new Tile(x, y);
-        move(point, Player.USER);
     }
 
     public void setupBoard() {
