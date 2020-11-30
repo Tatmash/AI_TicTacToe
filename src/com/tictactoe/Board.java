@@ -42,6 +42,10 @@ public class Board {
         return emptyTiles;
     }
 
+    public void setBoard(Player[][] newBoard){
+        this.board = newBoard;
+    }
+
     public void move(Tile point, Player player) {
         board[point.getX()][point.getY()] = player;
     }
