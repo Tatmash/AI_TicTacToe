@@ -2,7 +2,7 @@ package com.tictactoe;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,13 +10,13 @@ class BoardTest {
     Board testBoard = new Board();
     Player[][] computerWinsBoard = {
             {Player.COMPUTER, Player.COMPUTER, Player.COMPUTER},
-            {Player.USER, Player.USER, Player.USER},
-            {Player.USER, Player.USER, Player.USER}
+            {Player.COMPUTER, Player.USER, Player.USER},
+            {Player.USER, Player.USER, Player.COMPUTER}
     };
 
     Player[][] userWinsBoard = {
-            {Player.USER, Player.COMPUTER, Player.COMPUTER},
-            {Player.USER, Player.COMPUTER, Player.COMPUTER},
+            {Player.USER, Player.COMPUTER, Player.USER},
+            {Player.USER, Player.USER, Player.COMPUTER},
             {Player.USER, Player.COMPUTER, Player.COMPUTER}
     };
 
@@ -32,32 +32,50 @@ class BoardTest {
             {Player.NONE, Player.NONE, Player.NONE}
     };
 
+    Player[][] boardInUse = {
+            {Player.USER, Player.USER, Player.COMPUTER},
+            {Player.NONE, Player.NONE, Player.NONE},
+            {Player.NONE, Player.NONE, Player.NONE}
+    };
+
     @Test
-    void isRunning_1() {
+    void isRunning() {
         testBoard.setBoard(computerWinsBoard);
         assertFalse(testBoard.isRunning());
-    }
-
-    @Test
-    void isRunning_2() {
         testBoard.setBoard(userWinsBoard);
         assertFalse(testBoard.isRunning());
-    }
-
-    @Test
-    void isRunning_3() {
         testBoard.setBoard(drawFullBoard);
         assertFalse(testBoard.isRunning());
-    }
-
-    @Test
-    void isRunning_4() {
         testBoard.setBoard(emptyBoard);
         assertTrue(testBoard.isRunning());
     }
 
     @Test
-    void getEmptyTiles() {
+    void getEmptyTiles_1() {
+        ArrayList<Tile> empty = new ArrayList<>();
+        ArrayList<Tile> full = new ArrayList<>();
+        ArrayList<Tile> halfFull = new ArrayList<>();
+        empty.add(new Tile(0,0));
+        empty.add(new Tile(0,1));
+        empty.add(new Tile(0,2));
+        empty.add(new Tile(1,0));
+        empty.add(new Tile(1,1));
+        empty.add(new Tile(1,2));
+        empty.add(new Tile(2,0));
+        empty.add(new Tile(2,1));
+        empty.add(new Tile(2,2));
+        halfFull.add(new Tile(1,0));
+        halfFull.add(new Tile(1,1));
+        halfFull.add(new Tile(1,2));
+        halfFull.add(new Tile(2,0));
+        halfFull.add(new Tile(2,1));
+        halfFull.add(new Tile(2,2));
+        testBoard.setBoard(emptyBoard);
+        assertEquals(empty, testBoard.getEmptyTiles());
+        testBoard.setBoard(boardInUse);
+        assertEquals(halfFull, testBoard.getEmptyTiles());
+        testBoard.setBoard(drawFullBoard);
+        assertEquals(full, testBoard.getEmptyTiles());
     }
 
     @Test
