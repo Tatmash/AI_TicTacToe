@@ -39,7 +39,7 @@ public class Tile {
         if (!(o instanceof Tile)) return false;
         Tile tile = (Tile) o;
         return getX() == tile.getX() &&
-                getY() == tile.getY();
+               getY() == tile.getY();
     }
 
     @Override

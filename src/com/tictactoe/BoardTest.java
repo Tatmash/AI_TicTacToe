@@ -1,38 +1,40 @@
 package com.tictactoe;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
-    Board testBoard = new Board();
-    Player[][] computerWinsBoard = {
+    private Board testBoard = new Board();
+    private Player[][] computerWinsBoard = {
             {Player.COMPUTER, Player.COMPUTER, Player.COMPUTER},
             {Player.COMPUTER, Player.USER, Player.USER},
             {Player.USER, Player.USER, Player.COMPUTER}
     };
 
-    Player[][] userWinsBoard = {
+    private Player[][] userWinsBoard = {
             {Player.USER, Player.COMPUTER, Player.USER},
             {Player.USER, Player.USER, Player.COMPUTER},
             {Player.USER, Player.COMPUTER, Player.COMPUTER}
     };
 
-    Player[][] drawFullBoard = {
+    private Player[][] drawFullBoard = {
             {Player.USER, Player.COMPUTER, Player.COMPUTER},
             {Player.COMPUTER,Player.USER,Player.USER},
             {Player.USER, Player.COMPUTER, Player.COMPUTER}
     };
 
-    Player[][] emptyBoard = {
+    private Player[][] emptyBoard = {
             {Player.NONE, Player.NONE, Player.NONE},
             {Player.NONE, Player.NONE, Player.NONE},
             {Player.NONE, Player.NONE, Player.NONE}
     };
 
-    Player[][] boardInUse = {
+    private Player[][] boardInUse = {
             {Player.USER, Player.USER, Player.COMPUTER},
             {Player.NONE, Player.NONE, Player.NONE},
             {Player.NONE, Player.NONE, Player.NONE}
@@ -51,35 +53,65 @@ class BoardTest {
     }
 
     @Test
-    void getEmptyTiles_1() {
-        ArrayList<Tile> empty = new ArrayList<>();
-        ArrayList<Tile> full = new ArrayList<>();
-        ArrayList<Tile> halfFull = new ArrayList<>();
-        empty.add(new Tile(0,0));
-        empty.add(new Tile(0,1));
-        empty.add(new Tile(0,2));
-        empty.add(new Tile(1,0));
-        empty.add(new Tile(1,1));
-        empty.add(new Tile(1,2));
-        empty.add(new Tile(2,0));
-        empty.add(new Tile(2,1));
-        empty.add(new Tile(2,2));
-        halfFull.add(new Tile(1,0));
-        halfFull.add(new Tile(1,1));
-        halfFull.add(new Tile(1,2));
-        halfFull.add(new Tile(2,0));
-        halfFull.add(new Tile(2,1));
-        halfFull.add(new Tile(2,2));
+    void getEmptyTiles() {
+        ArrayList<Tile> emptyTilesOnFullBoard = new ArrayList<>();
+        ArrayList<Tile> emptyTilesOnEmptyBoard;
+        ArrayList<Tile> emptyTilesOnHalfFullBoard;
+        emptyTilesOnEmptyBoard = fillUpList_EmptyBoard();
+        emptyTilesOnHalfFullBoard = fillUpList_HalfFullBard();
         testBoard.setBoard(emptyBoard);
-        assertEquals(empty, testBoard.getEmptyTiles());
+        assertEquals(emptyTilesOnEmptyBoard, testBoard.getEmptyTiles());
         testBoard.setBoard(boardInUse);
-        assertEquals(halfFull, testBoard.getEmptyTiles());
+        assertEquals(emptyTilesOnHalfFullBoard, testBoard.getEmptyTiles());
         testBoard.setBoard(drawFullBoard);
-        assertEquals(full, testBoard.getEmptyTiles());
+        assertEquals(emptyTilesOnFullBoard, testBoard.getEmptyTiles());
+    }
+
+    private ArrayList<Tile> fillUpList_HalfFullBard() {
+        ArrayList<Tile> result = new ArrayList<>();
+        result.add(new Tile(1,0));
+        result.add(new Tile(1,1));
+        result.add(new Tile(1,2));
+        result.add(new Tile(2,0));
+        result.add(new Tile(2,1));
+        result.add(new Tile(2,2));
+        return result;
+    }
+
+    private ArrayList<Tile> fillUpList_EmptyBoard() {
+        ArrayList<Tile> result = new ArrayList<>();
+        result.add(new Tile(0,0));
+        result.add(new Tile(0,1));
+        result.add(new Tile(0,2));
+        result.add(new Tile(1,0));
+        result.add(new Tile(1,1));
+        result.add(new Tile(1,2));
+        result.add(new Tile(2,0));
+        result.add(new Tile(2,1));
+        result.add(new Tile(2,2));
+        return result;
+    }
+
+//    @Rule
+//    public ExpectedException thrown = ExpectedException.none();
+//
+//    @Test
+//    public void throwsNothing() {
+//        // no exception expected, none thrown: passes.
+//    }
+//
+    @Test
+    void move_1() {
+        //thrown.expect(NullPointerException.class);
+        Tile point = new Tile(0,0);
+        assertThrows(NullPointerException.class, () -> testBoard.move(null, Player.COMPUTER),"blabla");
     }
 
     @Test
-    void move() {
+    void move_2() {
+        //thrown.expect(NullPointerException.class);
+        Tile point = new Tile(0,0);
+        assertThrows(NullPointerException.class, () -> testBoard.move(point, null),"blabla");
     }
 
     @Test
@@ -124,5 +156,9 @@ class BoardTest {
 
     @Test
     void getRootValues() {
+    }
+
+    @Test
+    void setBoard() {
     }
 }

@@ -1,6 +1,7 @@
 package com.tictactoe;
 import java.util.*;
 
+//TODO null pointer exceptions must be added to all applicable methods
 public class Board {
     private List<Tile> emptyTiles;
     private Scanner scanner;
@@ -47,6 +48,14 @@ public class Board {
     }
 
     public void move(Tile point, Player player) {
+        if (point == null)
+        {
+            throw new NullPointerException("Destination of a move can't be null.");
+        }
+        if (player == null)
+        {
+            throw new NullPointerException("Player can't be null when making a move.");
+        }
         board[point.getX()][point.getY()] = player;
     }
 
