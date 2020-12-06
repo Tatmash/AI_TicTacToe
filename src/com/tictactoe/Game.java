@@ -17,7 +17,7 @@ public class Game {
 
     private void initializeGame() {
         this.board = new Board();
-        this.board.setupBoard();
+        this.board.createEmptyBoard();
         this.random = new Random();
     }
 

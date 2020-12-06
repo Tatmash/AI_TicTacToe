@@ -1,7 +1,6 @@
 package com.tictactoe;
 import java.util.*;
 
-//TODO null pointer exceptions must be added to all applicable methods
 public class Board {
     private List<Tile> emptyTiles;
     private Scanner scanner;
@@ -20,19 +19,6 @@ public class Board {
 
     public Player[][] getBoard() {
         return board;
-    }
-
-    public boolean isRunning() {
-        if( isWinning(Player.COMPUTER) ) {
-            return false;
-        }
-        if( isWinning(Player.USER)) {
-            return false;
-        }
-        if( getEmptyTiles().isEmpty() ) {
-            return false;
-        }
-        return true;
     }
 
     public List<Tile> getEmptyTiles() {
@@ -55,15 +41,27 @@ public class Board {
         this.board = newBoard;
     }
 
+
+    public boolean isRunning() {
+        if( isWinning(Player.COMPUTER) ) {
+            return false;
+        }
+        if( isWinning(Player.USER)) {
+            return false;
+        }
+        if( getEmptyTiles().isEmpty() ) {
+            return false;
+        }
+        return true;
+    }
+
     public void emptyRootValues_forTest() { this.rootValues = null; }
 
     public void move(Tile point, Player player) {
-        if (point == null)
-        {
+        if (point == null){
             throw new NullPointerException("Destination of a move can't be null.");
         }
-        if (player == null)
-        {
+        if (player == null){
             throw new NullPointerException("Player can't be null when making a move.");
         }
         board[point.getX()][point.getY()] = player;
@@ -82,16 +80,16 @@ public class Board {
     }
 
     public void displayBoard() {
-        System.out.println();
-        System.out.println("  A "+"B "+"C");
+        System.out.print("\n");
+        System.out.print("  A "+"B "+"C\n");
         for (int i = 0; i < Constants.BOARD_SIZE; ++i) {
             System.out.print(i+1 + " ");
             for (int j = 0; j < Constants.BOARD_SIZE; ++j) {
                 System.out.print(board[i][j] + " ");
             }
-            System.out.println();
+            System.out.print("\n");
         }
-        System.out.println();
+        System.out.print("\n");
     }
 
     public boolean isWinning(Player player) {
@@ -115,7 +113,7 @@ public class Board {
         return false;
     }
 
-    public void setupBoard() {
+    public void createEmptyBoard() {
         for(int i=0;i<Constants.BOARD_SIZE;i++){
             for(int j=0;j<Constants.BOARD_SIZE;j++){
                 board[i][j] = Player.NONE;
@@ -148,6 +146,12 @@ public class Board {
     }
 
     public void callMinimax(int depth, Player player){
+        if(player != Player.COMPUTER){
+            throw new IllegalArgumentException("Player must be Computer.");
+        }
+        if(player == null){
+            throw new NullPointerException("Player must not be null.");
+        }
         rootValues.clear();
         minimax(depth, player);
     }
