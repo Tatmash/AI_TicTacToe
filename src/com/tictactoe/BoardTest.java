@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +31,12 @@ class BoardTest {
 
     private Player[][] emptyBoard = {
             {Player.NONE, Player.NONE, Player.NONE},
+            {Player.NONE, Player.NONE, Player.NONE},
+            {Player.NONE, Player.NONE, Player.NONE}
+    };
+
+    private Player[][] oneMoveMade = {
+            {Player.COMPUTER, Player.NONE, Player.NONE},
             {Player.NONE, Player.NONE, Player.NONE},
             {Player.NONE, Player.NONE, Player.NONE}
     };
@@ -92,31 +99,43 @@ class BoardTest {
         return result;
     }
 
-//    @Rule
-//    public ExpectedException thrown = ExpectedException.none();
-//
-//    @Test
-//    public void throwsNothing() {
-//        // no exception expected, none thrown: passes.
-//    }
-//
-    @Test
-    void move_1() {
-        //thrown.expect(NullPointerException.class);
-        Tile point = new Tile(0,0);
-        assertThrows(NullPointerException.class, () -> testBoard.move(null, Player.COMPUTER),"blabla");
+    private List<Tile> fillUpList_RootValues(){
+        List<Tile> result = new ArrayList<>();
+        Tile one = new Tile(0,0,1);
+        Tile two = new Tile(1,0,2);
+        Tile three = new Tile(2,0,3);
+        result.add(one);
+        result.add(two);
+        result.add(three);
+        return result;
     }
 
     @Test
-    void move_2() {
-        //thrown.expect(NullPointerException.class);
+    void move() {
         Tile point = new Tile(0,0);
-        assertThrows(NullPointerException.class, () -> testBoard.move(point, null),"blabla");
+        assertThrows(NullPointerException.class, () -> testBoard.move(null, Player.COMPUTER),"Test_move_1");
+        assertThrows(NullPointerException.class, () -> testBoard.move(point, null),"Test_move_2");
+        testBoard.setBoard(emptyBoard);
+        testBoard.move(point,Player.COMPUTER);
+        Player[][] board1 = testBoard.getBoard();
+        String playerOnTestBoard = board1[0][0].name();
+        String playerOnOther = oneMoveMade[0][0].name();
+        assertEquals(playerOnOther,playerOnTestBoard);
     }
 
     @Test
     void getBestMove() {
+        Tile nullTile = null;
+        Tile three = new Tile(2,0,3);
+        List<Tile> rootValuesToAdd = fillUpList_RootValues();
+        testBoard.setRootValues_forTest(rootValuesToAdd);
+        int a = three.getMinimaxValue();
+        int b = testBoard.getBestMove().getMinimaxValue();
+        assertEquals(a,b);
+        testBoard.emptyRootValues_forTest();
+        assertThrows(NullPointerException.class, () -> testBoard.getBestMove());
     }
+
 
     @Test
     void displayBoard() {

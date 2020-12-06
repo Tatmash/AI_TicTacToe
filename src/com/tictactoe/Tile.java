@@ -12,6 +12,12 @@ public class Tile {
         this.y = row;
     }
 
+    public Tile(int column, int row, int minimaxValue){
+        this.x = column;
+        this.y = row;
+        this.minimaxValue = minimaxValue;
+    }
+
     public int getX() {
         return x;
     }
@@ -46,4 +52,5 @@ public class Tile {
     public int hashCode() {
         return Objects.hash(getX(), getY());
     }
+
 }

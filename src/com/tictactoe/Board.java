@@ -18,6 +18,10 @@ public class Board {
         this.board = new Player[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
     }
 
+    public Player[][] getBoard() {
+        return board;
+    }
+
     public boolean isRunning() {
         if( isWinning(Player.COMPUTER) ) {
             return false;
@@ -43,9 +47,15 @@ public class Board {
         return emptyTiles;
     }
 
+    public void setRootValues_forTest(List<Tile> rootValuesToAdd) {
+        this.rootValues = rootValuesToAdd;
+    }
+
     public void setBoard(Player[][] newBoard){
         this.board = newBoard;
     }
+
+    public void emptyRootValues_forTest() { this.rootValues = null; }
 
     public void move(Tile point, Player player) {
         if (point == null)
@@ -177,5 +187,23 @@ public class Board {
 
     public List<Tile> getRootValues(){
         return this.rootValues;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+        Board board1 = (Board) o;
+        return getEmptyTiles().equals(board1.getEmptyTiles()) &&
+                getScanner().equals(board1.getScanner()) &&
+                Arrays.equals(getBoard(), board1.getBoard()) &&
+                getRootValues().equals(board1.getRootValues());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(getEmptyTiles(), getScanner(), getRootValues());
+        result = 31 * result + Arrays.hashCode(getBoard());
+        return result;
     }
 }
