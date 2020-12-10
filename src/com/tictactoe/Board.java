@@ -146,17 +146,24 @@ public class Board {
     }
 
     public void callMinimax(int depth, Player player){
-        if(player != Player.COMPUTER){
-            throw new IllegalArgumentException("Player must be Computer.");
-        }
         if(player == null){
             throw new NullPointerException("Player must not be null.");
+        }
+        if(player != Player.COMPUTER){
+            throw new IllegalArgumentException("Player must be Computer.");
         }
         rootValues.clear();
         minimax(depth, player);
     }
 
     public int minimax(int depth, Player player) {
+        if(player == null){
+            throw new NullPointerException("Player must not be null.");
+        }
+        if(player == Player.NONE){
+            throw new IllegalArgumentException("Player must not be \"Player.NONE\".");
+        }
+        if( depth < 0) {throw new IllegalArgumentException("depth must be more than 0");}
         if (isWinning(Player.COMPUTER)) return +1;
         if (isWinning(Player.USER)) return -1;
         List<Tile> availableCells = getEmptyTiles();
@@ -165,7 +172,7 @@ public class Board {
         List<Integer> scores = new ArrayList<>();
         for (int i = 0; i < availableCells.size(); i++) {
             Tile point = availableCells.get(i);
-            if (player == Player.COMPUTER) { //X's turn select the highest from below minimax() call
+            if (player == Player.COMPUTER) { //X's turn select the highest from minimax() call below
                 move(point, Player.COMPUTER);
                 int currentScore = minimax(depth + 1, Player.USER);
                 scores.add(currentScore);
@@ -173,7 +180,7 @@ public class Board {
                     point.setMinimaxValue(currentScore);
                     rootValues.add(point);
                 }
-            } else if (player == Player.USER) {//O's turn select the lowest from below minimax() call
+            } else if (player == Player.USER) {//O's turn select the lowest from minimax() call below
                 move(point, Player.USER);
                 scores.add(minimax(depth + 1, Player.COMPUTER));
             }
