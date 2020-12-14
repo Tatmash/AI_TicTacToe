@@ -100,8 +100,9 @@ class BoardTest {
         result.add(1);
         result.add(2);
         result.add(3);
-        return result;
-    }
+
+       return result;
+}
 
     private List<Integer> fillUpList_ExpectedScores_MiniMax() {
         List<Integer> result = new ArrayList<>();
@@ -110,7 +111,6 @@ class BoardTest {
         result.add(3);
         return result;
     }
-
     @Test
     void isRunning() {
         testBoard.setBoard(computerWinsBoard_row);
@@ -261,17 +261,5 @@ class BoardTest {
         assertThrows(IllegalArgumentException.class, () -> testBoard.minimax(-1, Player.USER));
         testBoard.setBoard(boardInUse);
         assertEquals(1,testBoard.minimax(0,Player.COMPUTER));
-    }
-
-    @Test
-    void getScanner() {
-    }
-
-    @Test
-    void getRootValues() {
-    }
-
-    @Test
-    void setBoard() {
     }
 }

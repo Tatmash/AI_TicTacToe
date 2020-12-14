@@ -2,7 +2,6 @@ package com.tictactoe;
 import java.util.*;
 
 public class Board {
-    private List<Tile> emptyTiles;
     private Scanner scanner;
     private Player[][] board;
     private List<Tile> rootValues;
@@ -21,8 +20,10 @@ public class Board {
         return board;
     }
 
+    public Scanner getScanner() { return scanner; }
+
     public List<Tile> getEmptyTiles() {
-        emptyTiles = new ArrayList<>();
+        List<Tile> emptyTiles = new ArrayList<>();
         for (int i = 0; i < Constants.BOARD_SIZE; ++i) {
             for (int j = 0; j < Constants.BOARD_SIZE; ++j) {
                 if (board[i][j] == Player.NONE) {
@@ -190,10 +191,6 @@ public class Board {
             return returnMax(scores);
         }
         return returnMin(scores);
-    }
-
-    public Scanner getScanner() {
-        return scanner;
     }
 
     public List<Tile> getRootValues(){
