@@ -51,9 +51,9 @@ class Validation {
         return (letter.equals("a") || letter.equals("A") ||
                 letter.equals("b") || letter.equals("B") ||
                 letter.equals("c") || letter.equals("C")) &&
-                (Integer.parseInt(digit) == 1 ||
-                        Integer.parseInt(digit) == 2 ||
-                        Integer.parseInt(digit) == 3);
+               (Integer.parseInt(digit) == 1 ||
+                Integer.parseInt(digit) == 2 ||
+                Integer.parseInt(digit) == 3);
     }
 
     private static String changeOrderOfChars(String userInput) {

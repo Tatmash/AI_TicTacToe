@@ -12,6 +12,12 @@ public class Tile {
         this.y = row;
     }
 
+    public Tile(int column, int row, int minimaxValue){
+        this.x = column;
+        this.y = row;
+        this.minimaxValue = minimaxValue;
+    }
+
     public int getX() {
         return x;
     }
@@ -39,11 +45,12 @@ public class Tile {
         if (!(o instanceof Tile)) return false;
         Tile tile = (Tile) o;
         return getX() == tile.getX() &&
-                getY() == tile.getY();
+               getY() == tile.getY();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getX(), getY());
     }
+
 }

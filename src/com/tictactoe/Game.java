@@ -17,7 +17,7 @@ public class Game {
 
     private void initializeGame() {
         this.board = new Board();
-        this.board.setupBoard();
+        this.board.createEmptyBoard();
         this.random = new Random();
     }
 
@@ -70,7 +70,7 @@ public class Game {
             board.displayBoard();
             board.callMinimax(0, Player.COMPUTER);
             for (Tile tile : board.getRootValues()) {
-                System.out.println("Tile values: " + tile + " minimaxValue: " + tile.getMinimaxValue());
+                System.out.println("Field values: " + tile + "  " + tile.getMinimaxValue());
             }
             if(board.getEmptyTiles().size() != 0) {
                 board.move(board.getBestMove(), Player.COMPUTER);
@@ -85,8 +85,7 @@ public class Game {
     private String takeCoordinates() {
         String result = null;
         while(!this.flag){
-            System.out.println( "Make a move by entering the letter corresponding to your chosen column plus enter\n" +
-                    "and the corresponding number to your chosen row plus enter.\n" +
+            System.out.println( "Make a move by entering the coordinates of your chosen field.\n" +
                     "Please enter your move:");
             String userInput = board.getScanner().next();
             if(Validation.miracleFunction1(userInput)){
