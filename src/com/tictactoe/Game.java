@@ -69,14 +69,16 @@ public class Game {
             board.move(userTile, Player.USER);
             board.displayBoard();
             board.callMinimax(0, Player.COMPUTER);
+            System.out.println("Evaluating board: ");
             for (Tile tile : board.getRootValues()) {
-                System.out.println("Field values: " + tile + "  " + tile.getMinimaxValue());
+                System.out.println("Coordinates of field: " + tile + " Value: " + tile.getMinimaxValue());
             }
             if(board.getEmptyTiles().size() != 0) {
                 board.move(board.getBestMove(), Player.COMPUTER);
                 board.displayBoard();
                 if (!board.isRunning()) {
                     break;
+
                 }
             }
         }
