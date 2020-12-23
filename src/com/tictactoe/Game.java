@@ -1,5 +1,7 @@
+/**
+ * JavaDoc comes here.
+ * */
 package com.tictactoe;
-
 import java.util.Random;
 
 public class Game {
@@ -71,7 +73,7 @@ public class Game {
             board.callMinimax(0, Player.COMPUTER);
             System.out.println("Evaluating board: ");
             for (Tile tile : board.getRootValues()) {
-                System.out.println("Coordinates of field: " + tile + " Value: " + tile.getMinimaxValue());
+                System.out.println("Coordinates of field: " + tile + " - Value: " + tile.getMinimaxValue());
             }
             if(board.getEmptyTiles().size() != 0) {
                 board.move(board.getBestMove(), Player.COMPUTER);
