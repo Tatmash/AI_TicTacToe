@@ -1,5 +1,5 @@
 
-###What is the project about?
+#What is the project about?
 
 This program can be used for playing Tic-Tac-Toe in the command line by a single player against the machine. 
 The logic of producing machine-moves is based on a decision tree. The tree is searched by the MiniMax algorithm which has been expedited by the Alpha-Beta Pruning algorithm.
