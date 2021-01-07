@@ -18,9 +18,9 @@ You could "checkout" the project with your preferred IDEA or alternatively:
 ![Command Line gif](images/aitictactoe1.gif)
 ###Areas for possible development:
 There is plenty of room for improvement. A few of the ideas I have in mind:
-*Expanding the size of the board to 20x20 instead of 3x3. Adjusting the rules of the game according to the expansion as needed. (eg. 5 of the same type of signs need to be lined up to win)
-*Expanding the test coverage to 100%.
-*Creating a graphical user interface to the program.
-*Implementing other search algorithms.
+* Expanding the size of the board to 20x20 instead of 3x3. Adjusting the rules of the game according to the expansion as needed. (eg. 5 of the same type of signs need to be lined up to win)
+* Expanding the test coverage to 100%.
+* Creating a graphical user interface to the program.
+* Implementing other search algorithms.
 
 If you would like to contribute to this project you are very welcome to do so. Please open an issue so that we can discuss your idea.
