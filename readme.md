@@ -15,7 +15,7 @@ You could "checkout" the project with your preferred IDEA or alternatively:
  6. Have fun :)
 
 ###The program in action
-![Command Line gif](images/aitictactoe1.gif)
+![Command Line gif](images/tictactoe-550x589.gif)
 ###Areas for possible development:
 There is plenty of room for improvement. A few of the ideas I have in mind:
 * Expanding the size of the board to 20x20 instead of 3x3. Adjusting the rules of the game according to the expansion as needed. (eg. 5 of the same type of signs need to be lined up to win)
