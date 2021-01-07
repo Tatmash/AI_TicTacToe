@@ -10,7 +10,5 @@ public enum TileState {
     }
 
     @Override
-    public String toString(){
-        return this.state;
-    }
+    public String toString() { return this.state; }
 }

@@ -7,12 +7,12 @@ public class Tile {
     private int y;
     private int minimaxValue;
 
-    public Tile(int column, int row){
+    public Tile(int column, int row) {
         this.x = column;
         this.y = row;
     }
 
-    public Tile(int column, int row, int minimaxValue){
+    public Tile(int column, int row, int minimaxValue) {
         this.x = column;
         this.y = row;
         this.minimaxValue = minimaxValue;
@@ -35,8 +35,8 @@ public class Tile {
     }
 
     @Override
-    public String toString(){
-        return "("+this.x+","+this.y+")";
+    public String toString() {
+        return "(" + this.x + "," + this.y + ")";
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Tile {
         if (!(o instanceof Tile)) return false;
         Tile tile = (Tile) o;
         return getX() == tile.getX() &&
-               getY() == tile.getY();
+                getY() == tile.getY();
     }
 
     @Override

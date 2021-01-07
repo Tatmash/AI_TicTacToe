@@ -1,43 +1,44 @@
 package com.tictactoe;
+
 import java.util.ArrayList;
 
 class Validation {
 
     static boolean miracleFunction1(String userInput) {
-        if(isLengthTwoDigits(userInput)){
-            if(oneLetterOneDigit(userInput)){
+        if (isLengthTwoDigits(userInput)) {
+            if (oneLetterOneDigit(userInput)) {
                 return true;
-            }else{
+            } else {
                 System.out.println("Mate, you need to enter two characters. A *letter* and a *number*.\n");
                 return false;
             }
-        }else{
+        } else {
             System.out.println("Mate, you need to enter *two* characters. A letter and a number.\n");
             return false;
         }
     }
 
-    static String miracleFunction2(String userInput){
-        if(rightOrder(userInput)){
+    static String miracleFunction2(String userInput) {
+        if (rightOrder(userInput)) {
             return userInput;
-        }else{
+        } else {
             return changeOrderOfChars(userInput);
         }
     }
 
-    static boolean miracleFunction3(String userInput){
-        if(rightValues(userInput)){
+    static boolean miracleFunction3(String userInput) {
+        if (rightValues(userInput)) {
             return true;
-        }else{
+        } else {
             System.out.println("Listen, the coordinates are wrong. :(\n");
             return false;
         }
     }
 
-    static boolean miracleFunction4(Board board, int column, int row){
+    static boolean miracleFunction4(Board board, int column, int row) {
         ArrayList<Tile> emptyTiles = (ArrayList<Tile>) board.getEmptyTiles();
         Tile candidateTile = new Tile(row, column);
-        if(emptyTiles.contains(candidateTile)){
+        if (emptyTiles.contains(candidateTile)) {
             emptyTiles.clear();
             return true;
         }
@@ -51,9 +52,9 @@ class Validation {
         return (letter.equals("a") || letter.equals("A") ||
                 letter.equals("b") || letter.equals("B") ||
                 letter.equals("c") || letter.equals("C")) &&
-               (Integer.parseInt(digit) == 1 ||
-                Integer.parseInt(digit) == 2 ||
-                Integer.parseInt(digit) == 3);
+                (Integer.parseInt(digit) == 1 ||
+                 Integer.parseInt(digit) == 2 ||
+                 Integer.parseInt(digit) == 3);
     }
 
     private static String changeOrderOfChars(String userInput) {

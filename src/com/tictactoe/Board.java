@@ -6,7 +6,7 @@ public class Board {
     private Player[][] board;
     private List<Tile> rootValues;
 
-    public Board(){
+    public Board() {
         initializeBoard();
     }
 
@@ -20,7 +20,9 @@ public class Board {
         return board;
     }
 
-    public Scanner getScanner() { return scanner; }
+    public Scanner getScanner() {
+        return scanner;
+    }
 
     public List<Tile> getEmptyTiles() {
         List<Tile> emptyTiles = new ArrayList<>();
@@ -38,31 +40,33 @@ public class Board {
         this.rootValues = rootValuesToAdd;
     }
 
-    public void setBoard(Player[][] newBoard){
+    public void setBoard(Player[][] newBoard) {
         this.board = newBoard;
     }
 
 
     public boolean isRunning() {
-        if( isWinning(Player.COMPUTER) ) {
+        if (isWinning(Player.COMPUTER)) {
             return false;
         }
-        if( isWinning(Player.USER)) {
+        if (isWinning(Player.USER)) {
             return false;
         }
-        if( getEmptyTiles().isEmpty() ) {
+        if (getEmptyTiles().isEmpty()) {
             return false;
         }
         return true;
     }
 
-    public void emptyRootValues_forTest() { this.rootValues = null; }
+    public void emptyRootValues_forTest() {
+        this.rootValues = null;
+    }
 
     public void move(Tile point, Player player) {
-        if (point == null){
+        if (point == null) {
             throw new NullPointerException("Destination of a move can't be null.");
         }
-        if (player == null){
+        if (player == null) {
             throw new NullPointerException("Player can't be null when making a move.");
         }
         board[point.getX()][point.getY()] = player;
@@ -82,9 +86,9 @@ public class Board {
 
     public void displayBoard() {
         System.out.print("\n");
-        System.out.print("  A "+"B "+"C\n");
+        System.out.print("  A " + "B " + "C\n");
         for (int i = 0; i < Constants.BOARD_SIZE; ++i) {
-            System.out.print(i+1 + " ");
+            System.out.print(i + 1 + " ");
             for (int j = 0; j < Constants.BOARD_SIZE; ++j) {
                 System.out.print(board[i][j] + " ");
             }
@@ -95,19 +99,19 @@ public class Board {
 
     public boolean isWinning(Player player) {
         // checking diagonals
-        if ( board[0][0] == player && board[1][1] == player && board[2][2] == player ) {
+        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
             return true;
         }
-        if( board[0][2] == player && board[1][1] == player && board[2][0] == player ){
+        if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
             return true;
         }
         for (int i = 0; i < Constants.BOARD_SIZE; i++) {
             // checking rows
-            if ( board[i][0] == player && board[i][1] == player && board[i][2] == player ) {
+            if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
                 return true;
             }
             // checking columns
-            if( board[0][i] == player && board[1][i] == player && board[2][i] == player ){
+            if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
                 return true;
             }
         }
@@ -115,8 +119,8 @@ public class Board {
     }
 
     public void createEmptyBoard() {
-        for(int i=0;i<Constants.BOARD_SIZE;i++){
-            for(int j=0;j<Constants.BOARD_SIZE;j++){
+        for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+            for (int j = 0; j < Constants.BOARD_SIZE; j++) {
                 board[i][j] = Player.NONE;
             }
         }
@@ -146,11 +150,11 @@ public class Board {
         return list.get(index);
     }
 
-    public void callMinimax(int depth, Player player){
-        if(player == null){
+    public void callMinimax(int depth, Player player) {
+        if (player == null) {
             throw new NullPointerException("Player must not be null.");
         }
-        if(player != Player.COMPUTER){
+        if (player != Player.COMPUTER) {
             throw new IllegalArgumentException("Player must be Computer.");
         }
         rootValues.clear();
@@ -158,13 +162,15 @@ public class Board {
     }
 
     public int minimax(int depth, Player player) {
-        if(player == null){
+        if (player == null) {
             throw new NullPointerException("Player must not be null.");
         }
-        if(player == Player.NONE){
+        if (player == Player.NONE) {
             throw new IllegalArgumentException("Player must not be \"Player.NONE\".");
         }
-        if( depth < 0) {throw new IllegalArgumentException("depth must be more than 0");}
+        if (depth < 0) {
+            throw new IllegalArgumentException("depth must be more than 0");
+        }
         if (isWinning(Player.COMPUTER)) return +1;
         if (isWinning(Player.USER)) return -1;
         List<Tile> availableCells = getEmptyTiles();
@@ -187,13 +193,13 @@ public class Board {
             }
             board[point.getX()][point.getY()] = Player.NONE; //Reset this point
         }
-        if( player == Player.COMPUTER ){
+        if (player == Player.COMPUTER) {
             return returnMax(scores);
         }
         return returnMin(scores);
     }
 
-    public List<Tile> getRootValues(){
+    public List<Tile> getRootValues() {
         return this.rootValues;
     }
 
