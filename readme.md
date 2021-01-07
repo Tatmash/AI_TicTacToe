@@ -1,9 +1,11 @@
-###What is the project about?
+
+### What is the project about?
 
 This program can be used for playing Tic-Tac-Toe in the command line by a single player against the machine. 
 The logic of producing machine-moves is based on a decision tree. The tree is searched by the MiniMax algorithm which has been expedited by the Alpha-Beta Pruning algorithm.
 
-###How to run the code?
+
+### How to run the code?
 
 You could "checkout" the project with your preferred IDEA or alternatively:
 
@@ -14,9 +16,18 @@ You could "checkout" the project with your preferred IDEA or alternatively:
  5. Once the project has been compiled, type "java App" to run the program. The game will begin in your command line.
  6. Have fun :)
 
+<<<<<<< HEAD
 ###The program in action
 ![Command Line gif](images/tictactoe-550x589.gif)
 ###Areas for possible development:
+=======
+
+### The program in action
+
+![Command Line gif](images/aitictactoe1.gif)
+
+### Areas for possible development:
+>>>>>>> 9f388abf44300be4211b6ce16ca1b9745997ad44
 There is plenty of room for improvement. A few of the ideas I have in mind:
 * Expanding the size of the board to 20x20 instead of 3x3. Adjusting the rules of the game according to the expansion as needed. (eg. 5 of the same type of signs need to be lined up to win)
 * Expanding the test coverage to 100%.
