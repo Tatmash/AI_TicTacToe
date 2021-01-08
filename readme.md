@@ -18,7 +18,7 @@ You could "checkout" the project with your preferred IDEA or alternatively:
 
 ### The program in action
 
-![Command Line gif](images/tictactoe-550x589.gif)
+![Command Line gif](images/tictactoe_500x624.gif)
 
 
 ### Areas for possible development:
